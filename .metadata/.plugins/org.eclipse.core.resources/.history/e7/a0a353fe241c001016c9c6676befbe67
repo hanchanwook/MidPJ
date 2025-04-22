@@ -1,0 +1,5 @@
+package com.ict.project.repository;
+
+public interface Social_Service {
+
+}

@@ -1,0 +1,8 @@
+package com.ict.project.repository;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class Social_ServiceImpl implements Social_Service{
+
+}

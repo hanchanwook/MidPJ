@@ -1,0 +1,6 @@
+package com.ict.project.vo.Board;
+
+public class BoardVO {
+	private int board_id, view_count;
+	private String title, 
+}

@@ -1,0 +1,5 @@
+package com.ict.project.vo.personnel;
+/* 작성자: 김재겸 */
+public class SalaryVO {
+
+}

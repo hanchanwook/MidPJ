@@ -1,0 +1,6 @@
+package com.ict.project.vo.personnel;
+/* 작성자: 김재겸 */
+public class SalaryVO {
+	private int salary_id, pay_grade, base_salary, bonus;
+	private String emp_id, payment_date;
+}

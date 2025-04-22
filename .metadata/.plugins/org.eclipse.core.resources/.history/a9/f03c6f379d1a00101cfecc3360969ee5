@@ -1,0 +1,872 @@
+김재겸
+siegheil4059
+오프라인 표시
+
+hanchanwook. — 2025-04-02 오후 2:43
+-vm
+C:\openjdk-11\jdk-11.0.0.2\bin
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<descriptors>
+    <descriptor id="org.springframework.templates.mvc" kind="template" local="true" name="Spring MVC Project" requiresbundle="org.eclipse.m2e.core" size="0" version="3.2.2">
+        <description>A new Spring MVC web application development project</description>
+    </descriptor>
+    <descriptor category="GemFire" id="org.springframework.data.gemfire.template.standalone" kind="template" local="false" name="Spring Data GemFire Project (Standalone)" requires="[3.0.0,4.0)" size="7467" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-standalone-sts-template-1.0.1.RELEASE.zip" version="1.0.1.RELEASE">
+확장
+https-content.xml
+22KB
+hanchanwook. — 2025-04-03 오전 10:58
+지금 우리하는게
+일종의 서버 만드는 그런거지? 백엔드 단에서
+김재겸 — 2025-04-03 오전 10:58
+그냥 스프링 문법이랑 자바 문법 복습하는거에요
+hanchanwook. — 2025-04-03 오전 11:01
+응 그러치 서버의 틀을 만드는 연습 복습 아닌가 해서
+김재겸 — 2025-04-03 오전 11:02
+서버 본격적으로 만들려면 아직 한참 남았습니다 ㅋㅋㅋ
+이래서 헬이에요
+hanchanwook. — 2025-04-03 오전 11:02
+근데 그걸 한번에 하면 어차피 못할테니 기초적인 거부터 해서 여기서 저기 가고 이런거 익히는 중인거지?
+김재겸 — 2025-04-03 오전 11:02
+복습도 하면서 익히는 거죠
+그리고 이제는 진짜 졸면 큰일납니다
+뒤에 아예 못해요
+어노테이션도 많이 쓰고 하다보니
+hanchanwook. — 2025-04-03 오후 12:46
+근데 애노테이션이랑 XML이랑 하는 역할이 비슷 한건가?
+김재겸 — 2025-04-03 오후 12:46
+어노테이션 표현법이 좀 더 발전된 모습이에요
+hanchanwook. — 2025-04-03 오후 12:47
+음~ 비슷한 역할을 하는대 애노테이션이 더 개발자 친화적이다는거지?
+김재겸 — 2025-04-03 오후 12:47
+네네
+사용자에겐 백엔드는 도통 보이지가 않으니까 클라이언트 친화적이지는 않죠
+김재겸 — 2025-04-04 오전 11:26
+package com.ict.edu02.service;
+
+import org.springframework.stereotype.Service;
+
+import com.ict.edu02.vo.CalcVO;
+
+@Service
+public class CalcService {
+    public CalcService() {
+        System.out.println("CalcService 생성자");
+    }
+
+    public int getCalc(CalcVO cvo) {
+        int result = 0;
+        int su1 = Integer.parseInt(cvo.getS1());
+        int su2 = Integer.parseInt(cvo.getS2());
+        switch(cvo.getOp()) {
+        case "+" : result = su1 + su2; break;
+        case "-" : result = su1 - su2; break;
+        case "" : result = su1 su2; break;
+        case "/" : result = su1 / su2; break;
+    }
+        return result;
+    }
+}
+CalcService
+package com.ict.edu02.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+확장
+Day2Controller.java
+3KB
+김재겸 — 2025-04-04 오후 12:07
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.3.37</version>
+</dependency>
+hanchanwook. — 2025-04-07 오전 9:39
+-startup
+plugins/org.eclipse.equinox.launcher_1.6.300.v20210813-1054.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.win32.win32.x86_64_1.2.300.v20210828-0802
+-product
+org.springsource.sts.ide
+--launcher.defaultAction
+openFile
+-vm
+C:\openjdk-11\jdk-11.0.0.2\bin
+-vmargs
+-Dosgi.requiredJavaVersion=11
+-Dosgi.dataAreaRequiresExplicitInit=true
+-Xms512m
+-Xmx2048m
+--add-modules=ALL-SYSTEM
+-Dosgi.module.lock.timeout=10
+@GetMapping("/bookList")
+    public ModelAndView getBookUpdate(BookVO bvo) {
+        ModelAndView mv = new ModelAndView();
+        BookVO bookvo = bookService.getBookDetail(bvo);
+        mv.addObject("bvo", bookvo);
+        mv.setViewName("day02/result06");
+        return mv;
+
+    }
+hanchanwook. — 2025-04-07 오전 9:46
+<tr>
+                <td><input type="text" name="bookid" value="${bvo.bookid }"></td>
+                <td><input type="text" name="bookname" value="${bvo.bookname }"></td>
+                <td><input type="text" name="publisher" value="${bvo.publisher }"></td>
+                <td><input type="number" name="price" value=${bvo.price }></td>
+                <!-- disabled 파라미터가 넘어가지 않아서 hidden처리하자 -->
+            </tr>
+hanchanwook. — 2025-04-07 오전 10:13
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+    table {
+    width: 800px;
+    margin: 50px auto;
+    border-collapse: collapse;
+    }
+    table, th, td{
+        border: 1px solid green;
+        text-align: center;
+        padding : 20px;
+    }
+    h1{text-align: center;}
+</style>
+</head>
+<body>
+    <h2>BookList</h2>
+    <table>
+        <thead>
+            <tr>
+            <th>BOOKID</th><th>BOOKNAME</th><th>PUBLISHER</th><th>PRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>${bvo.bookid }</td>
+                <td>${bvo.bookname }</td>
+                <td>${bvo.publisher }</td>
+                <td>${bvo.price }</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <button onclick="update_go()">수정</button>
+                    <button onclick="delete_go()">삭제</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <script type="text/javascript">
+        function update_go() {
+            location.href="/bookupdate?bookid="+${bvo.bookid};
+        }
+        function delete_go() {
+            location.href=/bookdelete?bookid=${bvo.bookid};
+        }
+    </script>
+</body>
+</html>
+김재겸 — 2025-04-07 오전 11:53
+public ModelAndView fileUp(@RequestParam("f_name") MultipartFile f_name,
+            HttpServletRequest request)
+hanchanwook. — 2025-04-07 오후 2:01
+package com.ict.edu03.controller;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+확장
+message.txt
+4KB
+hanchanwook. — 2025-04-08 오전 11:09
+@GetMapping("/guestBookDelete")
+    public ModelAndView guestBookDelete(GuestBookVO gbvo) {
+
+        try {
+            ModelAndView mv = new ModelAndView();
+            GuestBookVO gvo = guestBookService.getGuestBookDetail(gbvo); 
+            if(gvo != null) {
+
+                // delete.jsp에서 gb_pw 와 gb_idx를 사용해야한다
+
+                mv.addObject("gvo", gvo);
+                mv.setViewName("day03/delete");
+                return mv;
+            }
+            return new ModelAndView("day03/error");
+        } catch (Exception e) {
+            return new ModelAndView("day03/error");
+        }
+
+
+    }
+
+    @PostMapping("/guestBookDeleteOK")
+    public ModelAndView guestBookDeleteOK(GuestBookVO gvbo) {
+        try {
+            ModelAndView mv = new ModelAndView();
+            int result = guestBookService.getGuestBookDelete(gvbo);
+            if(result>0) {
+                mv.setViewName("redirect:/guestbookList");
+                return mv;
+            }
+            return new ModelAndView("day03/error");
+        } catch (Exception e) {
+            return new ModelAndView("day03/error");
+        }
+    }
+public int getGuestBookUpdate(GuestBookVO gbvo) {
+        try {
+            return sqlSessionTemplate.update("guestbook.update", gbvo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+
+    public int getGuestBookDelete(GuestBookVO gbvo) {
+        try {
+            return sqlSessionTemplate.delete("guestbook.delete", gbvo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+repository/GuestBookDAO
+guestbook_mapper.xml
+<delete id="delete" parameterType="com.ict.edu03.vo.GuestBookVO" >
+        delete * from guestbook where gb_idx = #{gb_idx}
+    </delete>
+
+    <update id="update" parameterType="com.ict.edu03.vo.GuestBookVO">
+        update guestbook
+        set gb_name=#{gb_name}, gb_subject=#{gb_subject}, 
+            gb_content=#{gb_content},gb_email=#{gb_email},
+            gb_f-name=#{gb_f_name}
+        where gb_idx = #{gb_idx}
+    </update>
+day03/ 에 delete 잇나?
+김재겸 — 2025-04-08 오전 11:12
+script까지는 되어 있어요
+hanchanwook. — 2025-04-08 오전 11:13
+<script type="text/javascript">
+        function delete_ok(f) {
+            let pwdchk = ${gvo.gb_pw};
+            let pwd = document.querySeletor("#gb_pw").value;
+    //        console.log("pwdchk : " + pwdchk);
+    //        console.log("pwd : " + pwd);
+            if(pwd === pwdchk){
+                const msg = confirm("정말 삭제 할까여?");
+                if(msg){
+                    f.submit();
+                }else{
+                    // 이전 화면으로 이동
+                    window.history.go(-1);
+                }
+            }else{
+                alert("비밀번호 매칭 X");
+                document.querySeletor("#gb_pw") = "";
+                document.querySeletor("#gb_pw").focus();
+                return;
+            }
+
+
+        }
+    </script>
+스크립 한번 확인해보고~
+<tfoot>
+                    <tr align="center">
+                        <td colspan="2">
+                            <input type="button" onclick="delete_ok(this.form)" value="저장">
+                            <input type="hidden" name="gb_idx" value="${gvo.gb_idx }" >
+                            <input type="reset" value="취소">
+                        </td>
+                    </tr>
+                </tfoot>
+
+<tfoot> 쪽
+김재겸 — 2025-04-08 오전 11:14
+이상없습니다!
+hanchanwook. — 2025-04-08 오전 11:25
+<tbody>
+                <tr align="center">
+                    <td bgcolor="#99ccff">작성자</td>
+                    <td><input type="text" name="gb_name" size ="20" value="${gvo.gb_name }" required></td>
+                </tr>
+                <tr align="center">
+                    <td bgcolor="#99ccff">제  목</td>
+                    <td><input type="text" name="gb_subject" size ="20" value="${gvo.gb_subject }" required></td>
+                </tr>
+                <tr align="center">
+                    <td bgcolor="#99ccff">email</td>
+                    <td><input type="text" name="gb_email" size ="20" value="${gvo.gb_email }" required></td>
+                </tr>
+                <tr align="center">
+                    <td bgcolor="#99ccff">비밀번호</td>
+                    <td><input type="password" name="gb_pw" size ="20" required></td>
+                </tr>
+                <tr align="center">
+                    <td bgcolor="#99ccff">첨부파일</td>
+                    <td><input type="file" name="gb_file_name" size ="20"></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2">
+                        <textarea rows="10" cols="60" name="gb_content" id="gb_content" ></textarea>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td bgcolor="#99ccff">비밀번호</td>
+                    <td><input type="password" name="gb_pw" size="20" required></td>
+                </tr>
+                </tbody>
+hanchanwook. — 2025-04-08 오후 1:07
+Mapped Statements collection does not contain value for guestbook.list
+김재겸 — 2025-04-09 오후 4:07
+getUltraSrtNcst
+김재겸 — 2025-04-10 오전 11:17
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>5.3.13.RELEASE</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>5.3.13.RELEASE</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>5.3.13.RELEASE</version>
+    </dependency>
+hanchanwook. — 2025-04-10 오후 1:13
+<input type="hidden" name="b_idx" value="${b_idx} }">
+김재겸 — 2025-04-10 오후 2:16
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.3.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+</beans>
+hanchanwook. — 2025-04-11 오후 2:27
+// 주의 사항
+            // endBlock (3, 6, 9, 12....) 끝난다. 
+            // 실제 totalPage는 3, 6, 9로 끝나지 않는다.
+            if(paging.getEndBlock() >= paging.getTotalPage()) {
+                paging.setEndBlock(paging.getTotalPage());
+            }
+김재겸 — 2025-04-14 오후 12:03
+if(response === "match"){
+                    $("#pw-change-form").show();
+                }
+김재겸 — 어제 오전 10:20
+형 혹시 조퇴하는 법 알아요??
+hanchanwook. — 어제 오전 10:45
+너 그거 핫식스 너무 많이 먹어서 그래
+hanchanwook. — 오후 12:47
+우리도 include 써도 좋을지도?
+김재겸 — 오후 12:47
+그건 좀 있다가 생각해볼게요 ㅋㅋ
+hanchanwook. — 오후 12:47
+ㅋㅋㅋㅋ
+김재겸 — 오후 3:54
+형 다 풀었어요?
+hanchanwook. — 오후 3:54
+ㅇㅇ
+hanchanwook. — 오후 4:38
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3부상조 - 메인 페이지</title>
+<style type="text/css">
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f0f8ff; /* Light sky blue background */
+    color: #333;
+}
+
+/* Header Styles */
+#main-header {
+    background-color: #87ceeb; /* Sky blue theme */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-items {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-items li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.nav-items li a:hover {
+    background-color: #6ab7d5; /* Slightly darker sky blue on hover */
+    border-radius: 4px;
+}
+
+.badge {
+    background-color: #ff6b6b; /* Coral red for badge */
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+/* Mobile Menu Button */
+#mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Menu */
+#mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #87ceeb; /* Sky blue theme */
+    padding: 5rem 2rem 2rem;
+    transition: all 0.3s ease;
+}
+
+... (281줄 남음)
+접기
+message.txt
+8KB
+이미지
+Personnel_Employee_infor_inquiry
+﻿
+hanchanwook.
+hanchanwook.
+ 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3부상조 - 메인 페이지</title>
+<style type="text/css">
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f0f8ff; /* Light sky blue background */
+    color: #333;
+}
+
+/* Header Styles */
+#main-header {
+    background-color: #87ceeb; /* Sky blue theme */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-items {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-items li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.nav-items li a:hover {
+    background-color: #6ab7d5; /* Slightly darker sky blue on hover */
+    border-radius: 4px;
+}
+
+.badge {
+    background-color: #ff6b6b; /* Coral red for badge */
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+/* Mobile Menu Button */
+#mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Menu */
+#mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #87ceeb; /* Sky blue theme */
+    padding: 5rem 2rem 2rem;
+    transition: all 0.3s ease;
+}
+
+#mobile-menu.active {
+    right: 0;
+}
+
+/* Sidebar (Aside) Styles */
+#sidebar {
+    position: fixed;
+    top: 60px; /* Below the header */
+    left: 0;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    padding: 1rem;
+    z-index: 999;
+}
+
+#sidebar nav ul {
+    list-style: none;
+}
+
+#sidebar nav ul li {
+    margin-bottom: 1rem;
+}
+
+#sidebar nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    display: block;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+#sidebar nav ul li a:hover {
+    background-color: #e0f4ff; /* Very light sky blue on hover */
+    border-radius: 4px;
+    color: #4682b4; /* Steel blue for text on hover */
+}
+
+/* Main Content */
+main {
+    margin-top: 60px; /* Space for header */
+    margin-left: 200px; /* Space for sidebar */
+    padding: 2rem;
+    max-width: calc(100% - 200px);
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.hero-section h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.hero-section .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #87ceeb; /* Sky blue theme */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    background-color: #6ab7d5; /* Slightly darker sky blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Hide desktop nav and show mobile menu button */
+    .nav-items {
+        display: none;
+    }
+
+    #mobile-menu-btn {
+        display: block;
+    }
+
+    #mobile-menu {
+        display: block;
+    }
+
+    /* Hide sidebar on mobile */
+    #sidebar {
+        display: none;
+    }
+
+    /* Adjust main content for mobile */
+    main {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    .hero-section {
+        padding: 1.5rem;
+    }
+
+    .hero-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+}
+
+/* Additional Styling */
+a {
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #4682b4; /* Steel blue for links on hover */
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  font-family: sans-serif;
+  text-align: left;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+table thead {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #e6f7ff;
+}
+
+#main-body{
+	margin-top: 100px; 
+	 margin-left: 250px;
+}
+h2{ margin : 30px;}
+h4{ 
+margin-left : 30px;
+margin-bottom: 30px;
+ }
+</style>
+</head>
+<body>
+	<header id="main-header">
+    <div id="logo"><a href="/">3부상조</a></div>
+    <nav>
+      <ul class="nav-items">
+        <li><a href="/">직원 정보 조회(H)</a></li>
+        <li><a href="/cart">근무 지정</a></li>
+        <li><a href="/orders">인사 관리</a></li>
+        <li><a href="/signup">급여</a></li>
+        <li><a href="/login">휴가</a></li>
+      </ul>
+    </nav>
+    <button id="mobile-menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <aside id="mobile-menu">
+    <nav>
+      <ul class="nav-items">
+        <li><a href="/">직원 정보 조회(L)</a></li>
+        <li><a href="/cart">근무 지정</a></li>
+        <li><a href="/orders">인사 관리</a></li>
+        <li><a href="/signup">급 여</a></li>
+        <li><a href="/login">휴 가</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Sidebar for Desktop -->
+  <aside id="sidebar">
+    <nav>
+      <ul>
+        <li><a href="/">직원 정보 조회(L)</a></li>
+        <li><a href="/cart">근무 지정</a></li>
+        <li><a href="/orders">인사 관리</a></li>
+        <li><a href="/signup">급 여</a></li>
+        <li><a href="/login">휴 가</a></li>
+      </ul>
+    </nav>
+  </aside>
+<div id="main-body">
+  <h2>직원 정보 조회</h2>
+  <h4>모든 직원들의 정보를 확인합니다.</h4>
+<form method="post" >
+  <p>
+  <input type="text" name="name" onclick="send_search('/emp_name', this.form)">
+  <input type="button" value="이름 검색">
+  </p>
+
+  <input type="text" name="name"  onclick="send_search('/emp_id', this.form)"> 
+  <input type="button" value="사번 검색">
+    
+</form> 
+	<table>
+		<thead>
+			<tr>
+				<th>이 름</th>
+				<th>직원 번호(사번)</th>
+				<th>E-Mail</th>
+				<th>부 서</th>
+				<th>직 책</th>
+				<th>호 봉</th>
+				<th>입사일</th>
+				<th>전화 번호</th>
+				<th>주 소</th>
+				<th>퇴사일</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

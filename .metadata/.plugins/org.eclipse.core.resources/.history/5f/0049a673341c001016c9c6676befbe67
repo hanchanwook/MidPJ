@@ -1,0 +1,82 @@
+package com.ict.project.vo.Board;
+
+public class QuestionVO {
+	private int answer_id, deletable;
+	private String emp_email, emp_name, answer_status, 
+		answer_comment, question_title, question_details, question_date;
+	
+	//=====질문 번호=====
+	public int getAnswer_id() {
+		return answer_id;
+	}
+	public void setAnswer_id(int answer_id) {
+		this.answer_id = answer_id;
+	}
+	
+	//=====삭제 여부=====
+	public int getDeletable() {
+		return deletable;
+	}
+	public void setDeletable(int deletable) {
+		this.deletable = deletable;
+	}
+	
+	//=====이메일(아이디)=====
+	public String getEmp_email() {
+		return emp_email;
+	}
+	public void setEmp_email(String emp_email) {
+		this.emp_email = emp_email;
+	}
+	
+	//=====제목=====
+	public String getEmp_name() {
+		return emp_name;
+	}
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
+	}
+	
+	//=====답변 상태=====
+	public String getAnswer_status() {
+		return answer_status;
+	}
+	public void setAnswer_status(String answer_status) {
+		this.answer_status = answer_status;
+	}
+	
+	//=====관리자 답변=====
+	public String getAnswer_comment() {
+		return answer_comment;
+	}
+	public void setAnswer_comment(String answer_comment) {
+		this.answer_comment = answer_comment;
+	}
+	
+	//=====질문 제목=====
+	public String getQuestion_title() {
+		return question_title;
+	}
+	public void setQuestion_title(String question_title) {
+		this.question_title = question_title;
+	}
+	
+	//=====질문 내용=====
+	public String getQuestion_details() {
+		return question_details;
+	}
+	public void setQuestion_details(String question_details) {
+		this.question_details = question_details;
+	}
+	public String getQuestion_date() {
+		return question_date;
+	}
+	public void setQuestion_date(String question_date) {
+		this.question_date = question_date;
+	}
+	
+	
+	
+	
+	
+}

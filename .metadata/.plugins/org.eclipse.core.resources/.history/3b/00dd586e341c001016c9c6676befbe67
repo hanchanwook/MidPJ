@@ -1,0 +1,8 @@
+package com.ict.project.vo.Board;
+
+public class QuestionVO {
+	private int answer_id, deletable;
+	private String emp_email, emp_name, answer_status, 
+		answer_comment, question_title, question_details, question_date;
+	
+}

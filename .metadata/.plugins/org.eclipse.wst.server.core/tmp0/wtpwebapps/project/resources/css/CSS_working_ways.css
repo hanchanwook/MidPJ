@@ -1,0 +1,88 @@
+@charset "UTF-8";
+/* 작성자: 김재겸 */
+/* =============================================================================== */
+#main-body {
+	margin-top: 100px;
+	margin-left: 250px;
+}
+
+h2 {
+	margin: 30px;
+}
+
+h4 {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+form select, form textarea, form button {
+	margin-top: 10px;
+}
+
+/* 지도 이미지 */
+img[alt="지도 이미지"] {
+	width: 200px;
+	height: auto;
+	border: 1px solid #ccc;
+}
+
+/* 근무 방식 지정 영역 스타일 */
+.working-form-container {
+	display: flex; /* Flexbox 사용 */
+	gap: 40px; /* 두 영역 사이의 간격 */
+	align-items: flex-start; /* 상단 정렬 */
+	margin-left: 30px;
+}
+
+/* 지도 이미지 */
+img[alt="지도 이미지"] {
+	width: 200px;
+	height: auto;
+	border: 1px solid #ccc;
+}
+
+/* 추가 스타일을 아래에 추가 */
+#main-body {
+	margin-top: 100px;
+	margin-left: 250px;
+}
+
+h2 {
+	margin: 30px;
+}
+
+h4 {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+form select, form textarea, form button {
+	margin-top: 10px;
+}
+
+.location-select {
+	width: 200px;
+	height: 100px;
+	margin-top: 10px;
+}
+
+.detail-address {
+	margin-top: 10px;
+}
+
+.submit-button {
+	padding: 8px 16px;
+}
+
+.location-container {
+    display: flex; /* Flexbox 사용 */
+    gap: 20px; /* 두 박스 사이의 간격 */
+    background-color: #87ceeb; /* 헤더와 동일한 색상 */
+    padding: 10px; /* 패딩 추가 */
+    border-radius: 5px; /* 모서리 둥글게 */
+}
+
+.location-select-container,
+.address-container {
+    flex: 1; /* 두 박스가 동일한 너비를 가지도록 설정 */
+}

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/* 추가된 스타일 */
+.flex-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-left: 30px;
+}
+
+.map-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+form button {
+    padding: 8px 16px;
+}

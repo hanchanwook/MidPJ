@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/* 김재겸 css */
+/* =============================================================================== */
+
+#main-body {
+    margin-top: 100px;
+    margin-left: 250px;
+}
+
+h2 {
+    margin: 30px;
+}
+
+h4 {
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+form select,
+form textarea,
+form button {
+    margin-top: 10px;
+}
+
+/* 지도 이미지 */
+img[alt="지도 이미지"] {
+    width: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+/* 근무 방식 지정 영역 스타일 */
+.working-form-container {
+    display: flex; /* Flexbox 사용 */
+    gap: 40px; /* 두 영역 사이의 간격 */
+    align-items: flex-start; /* 상단 정렬 */
+    margin-left: 30px;
+}
+
+.map-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.map-image {
+    width: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.location-select {
+    width: 200px;
+    height: 100px;
+    margin-top: 10px;
+}
+
+.detail-address {
+    margin-top: 10px;
+}
+
+.submit-button {
+    padding: 8px 16px;
+}

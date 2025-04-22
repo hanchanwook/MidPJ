@@ -1,0 +1,10 @@
+package com.ict.project.vo.Board;
+/* 작성자: 김재겸 */
+public class BoardVO {
+	private int board_id, view_count;
+	private String title, content, emp_email, created_at, update_at, f_name;
+	private boolean is_deleted;
+	
+	
+	
+}

@@ -1,0 +1,5 @@
+package com.ict.project.vo.Board;
+
+public class QuestionVO {
+
+}

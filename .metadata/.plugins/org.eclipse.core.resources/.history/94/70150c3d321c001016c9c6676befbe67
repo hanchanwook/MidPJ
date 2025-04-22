@@ -1,0 +1,7 @@
+package com.ict.project.vo.Board;
+
+public class CommentVO {
+	private int comment_id, board_id;
+	private String emp_email, content, create_at;
+	private boolean is_deleted;
+}

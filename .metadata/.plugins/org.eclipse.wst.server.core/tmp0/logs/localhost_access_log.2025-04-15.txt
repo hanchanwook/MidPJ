@@ -1,0 +1,6 @@
+127.0.0.1 - - [15/Apr/2025:12:05:03 +0900] "GET / HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [15/Apr/2025:12:05:04 +0900] "GET /edu01/WEB-INF/views/select_workplaces/select_workplace.jsp HTTP/1.1" 404 722
+0:0:0:0:0:0:0:1 - - [15/Apr/2025:12:05:04 +0900] "GET /favicon.ico HTTP/1.1" 404 819
+127.0.0.1 - - [15/Apr/2025:12:13:11 +0900] "GET / HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [15/Apr/2025:12:13:12 +0900] "GET /edu01/WEB-INF/views/select_workplaces/select_workplace.jsp HTTP/1.1" 404 722
+0:0:0:0:0:0:0:1 - - [15/Apr/2025:12:13:12 +0900] "GET /favicon.ico HTTP/1.1" 404 819

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>근무 방식 지정</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: '맑은 고딕', sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    /* 상단 네비게이션 */
+    .topnav {
+      background-color: #93d4f5;
+      padding: 10px;
+      display: flex;
+      justify-content: space-around;
+      color: black;
+      font-weight: bold;
+    }
+
+    .topnav span.active {
+      color: red;
+    }
+
+    /* 메인 컨테이너 */
+    .main {
+      display: flex;
+      height: calc(100vh - 50px);
+    }
+
+    /* 왼쪽 사이드 메뉴 */
+    .sidebar {
+      width: 200px;
+      background-color: #e4e4e4;
+      padding: 20px;
+      box-sizing: border-box;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .sidebar-title {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* 본문 */
+    .content {
+      flex: 1;
+      background-color: white;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .content h2 {
+      margin-top: 0;
+    }
+
+    .map-section {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .map-section img {
+      width: 200px;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+
+    .form-section {
+      margin-left: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    select, textarea {
+      width: 250px;
+      padding: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 80px;
+      padding: 5px;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="topnav">
+    <span>3개월차조</span>
+    <span class="active">인사</span>
+    <span>직원 등록</span>
+    <span>근무 지정</span>
+    <span>인사 관리</span>
+    <span>급여</span>
+    <span>휴가</span>
+    <span>공지사항</span>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+      <div class="sidebar-title">근무 방식 지정</div>
+      희망 근무지 선택
+    </div>
+
+    <div class="content">
+      <h2>근무 방식 지정</h2>
+      <p>설명내용 - 희망 근무지를 선택하세요</p>
+
+      <div class="map-section">
+        <img src="https://via.placeholder.com/200x300?text=지도" alt="지도">
+
+        <div class="form-section">
+          <label>근무지 목록</label>
+          <select>
+            <option>경기도 연천지부</option>
+            <option>전라남도 나주시지부</option>
+            <option>경상북도 경산지부</option>
+            <option>강원도 속초지부</option>
+          </select>
+
+          <label>각 지부 별 상세 주소 ~</label>
+          <textarea rows="5"></textarea>
+
+          <button>신청</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
