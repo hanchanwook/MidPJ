@@ -1,0 +1,24 @@
+package com.ict.project.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ict.project.dao.UserDAO;
+import com.ict.project.vo.UserVO;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Override
+    public int registerUser(UserVO user) {
+        return userDAO.insertUser(user);
+    }
+
+    @Override
+    public UserVO loginUser(UserVO user) {
+        return userDAO.selectUser(user);
+    }
+}

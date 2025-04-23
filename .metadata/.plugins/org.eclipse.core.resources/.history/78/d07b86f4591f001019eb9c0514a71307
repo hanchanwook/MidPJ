@@ -1,0 +1,11 @@
+package com.ict.project.service;
+
+import com.ict.project.vo.personnel.EmployeeVO;
+
+
+public interface Nor_Service {
+	@autowired
+	private EmployeeVO evo;
+	
+	public EmployeeVO getNormalRegister(evo) {};
+}

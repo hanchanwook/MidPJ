@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3부상조 - 메인 페이지</title>
+    <!-- CSS 경로 지정: Header, Footer 스타일 -->
+    <link href="<c:url value='/resources/css/CSS.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/CSS_working_ways.css' />" rel="stylesheet">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+	<header id="main-header">
+    <div id="logo"><a href="/">3부상조</a></div>
+    <nav>
+      <ul class="nav-items">
+        <li><a href="/">직원등록</a></li>
+        <li><a href="/">근무 지정</a></li>
+        <li><a href="/">인사 관리</a></li>
+        <li><a href="/">급여</a></li>
+        <li><a href="/">휴가</a></li>
+      </ul>
+    </nav>
+    <button id="mobile-menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Sidebar for Desktop -->
+  <aside id="sidebar">
+    <nav>
+      <ul>
+        <li><a href="/">급여</a></li>
+        <li><a href="/">급여 정보</a></li>
+      </ul>
+    </nav>
+  </aside>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="3부상조 - 당신의 비즈니스 역할을 선택하세요.">
+    <title>3부상조 - 역할 선택</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #e0f4ff, #f0f8ff); /* Soft sky blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px; /* Increased width */
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 30px; /* Increased padding */
+            position: relative;
+            margin: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 20px; /* Space below header */
+        }
+
+        .header img {
+            width: 50px; /* Larger logo */
+            height: 50px;
+            margin-right: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .header img:hover {
+            transform: scale(1.1);
+        }
+
+        .header span {
+            font-size: 2rem; /* Larger font */
+            font-weight: 700;
+            color: #1e3a8a; /* Navy blue */
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .left-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            font-size: 2.2rem; /* Larger title */
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .box-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            width: 150px; /* Larger boxes */
+            height: 220px;
+            background: #87ceeb; /* Sky blue */
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem; /* Larger text */
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+            background: #6ab7d5; /* Darker sky blue */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .right-box {
+            flex: 1; /* Equal width to left-content */
+            background: #f0f8ff; /* Light blue placeholder */
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideUp 0.7s ease-out;
+            min-height: 400px; /* Minimum height to match content */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .header img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .header span {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .box {
+                width: 120px;
+                height: 180px;
+                font-size: 1.2rem;
+            }
+
+            .right-box {
+                width: 100%;
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="${pageContext.request.contextPath}/" class="header">
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709579.png" alt="로고">
+            <span>3부상조</span>
+        </a>
+
+        <div class="content-wrapper">
+            <div class="left-content">
+                <div class="title">당신의 담당은 무엇입니까?</div>
+                <div class="box-container">
+                    <div class="box">인사</div>
+                    <div class="box">재고</div>
+                    <div class="box">관리자</div>
+                </div>
+            </div>
+            <div class="right-box">
+                <!-- Image placeholder: Add your image here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Optional: Add click handlers for role boxes
+        document.querySelectorAll('.box').forEach(box => {
+            box.addEventListener('click', () => {
+                alert(`선택한 부서: ${box.textContent}`);
+                // Add logic to handle role selection if needed
+            });
+        });
+    </script>
+</body>
+</html>

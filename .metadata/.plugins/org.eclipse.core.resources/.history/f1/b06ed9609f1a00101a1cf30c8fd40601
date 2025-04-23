@@ -1,0 +1,136 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1516442719524-a603408c90cb?fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .signup-container {
+            background-color: rgba(0, 170, 255, 0.85);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .signup-container h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+        .signup-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            outline: none;
+        }
+        .signup-container button {
+            width: 95%;
+            padding: 10px;
+            background: linear-gradient(to bottom, #3a9bdc, #0a5fbd);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .signup-container button:hover {
+            background: linear-gradient(to bottom, #2b87c6, #084d9c);
+        }
+        .signup-container p {
+            margin-top: 15px;
+            color: white;
+            font-size: 12px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>회원가입</h2>
+    <form id="signupForm" onsubmit="return submitForm(event);">
+        <input type="email" id="emp_email" name="emp_email" placeholder="이메일" required>
+        <input type="text" id="emp_name" name="emp_name" placeholder="이름" required>
+        <input type="password" id="emp_password" name="emp_password" placeholder="비밀번호" required>
+        <input type="text" id="home" name="home" placeholder="집 주소" required>
+        <input type="text" id="phone_number" name="phone_number" placeholder="전화번호" required>
+        <button type="submit">가입 완료</button>
+        <p id="errorMessage" class="error-message"></p>
+    </form>
+    <p>이미 계정이 있으신가요? <a href="/login" style="color: white;">로그인</a></p>
+</div>
+
+<script>
+    async function submitForm(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
+
+        const emp_email = document.getElementById('emp_email').value.trim();
+        const emp_name = document.getElementById('emp_name').value.trim();
+        const emp_password = document.getElementById('emp_password').value.trim();
+        const home = document.getElementById('home').value.trim();
+        const phone_number = document.getElementById('phone_number').value.trim();
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (!emp_email || !emp_name || !emp_password || !home || !phone_number) {
+            errorMessage.textContent = "모든 항목을 입력해주세요.";
+            return false;
+        }
+
+        try {
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    emp_email,
+                    emp_name,
+                    emp_password,
+                    home,
+                    phone_number,
+                    dept_id: null,
+                    position: null,
+                    pay_grade: null,
+                    hire_date: null,
+                    resignation_date: null
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('회원가입이 완료되었습니다!');
+                window.location.href = '/login'; // 로그인 페이지로 리다이렉트
+            } else {
+                errorMessage.textContent = result.message || '회원가입에 실패했습니다.';
+            }
+        } catch (error) {
+            errorMessage.textContent = '서버 오류가 발생했습니다.';
+            console.error('Error:', error);
+        }
+
+        return false;
+    }
+</script>
+
+</body>
+</html>

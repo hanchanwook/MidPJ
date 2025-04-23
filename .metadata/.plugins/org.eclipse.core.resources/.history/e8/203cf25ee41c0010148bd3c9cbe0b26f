@@ -1,0 +1,5 @@
+package com.ict.project.vo.store;
+
+public class ItemVO {
+
+}

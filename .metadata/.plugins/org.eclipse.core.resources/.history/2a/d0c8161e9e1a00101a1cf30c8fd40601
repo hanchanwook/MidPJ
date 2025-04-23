@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="web">
+    <select id="findByEmpId" parameterType="string" resultType="com.ict.project.vo.UserVO">
+        SELECT * FROM users WHERE emp_id = #{emp_id}
+    </select>
+    <insert id="insertUser" parameterType="com.ict.project.vo.UserVO">
+        insert into user(*) values(emp_email=#{emp_email}, emp_password=#{emp_password})
+    </insert>
+</mapper>

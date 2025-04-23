@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>3부상조 - 로그인</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9f1f1;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .header span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .title {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .box-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .box {
+            width: 80px;
+            height: 120px;
+            background-color: #dddddd;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+        }
+        .login-button {
+            background-color: #dddddd;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .right-box {
+            position: absolute;
+            right: 50px;
+            width: 130px;
+            height: 300px;
+            background-color: #dddddd;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="logo.png" alt="로고">
+    <span>3부상조</span>
+</div>
+
+<div class="title">당신의 담당은 무엇입니까?</div>
+
+<div class="box-container">
+    <div class="box">인사</div>
+    <div class="box">재고</div>
+    <div class="box">관리자</div>
+</div>
+
+<button class="login-button">로그인</button>
+
+<div class="right-box"></div>
+
+</body>
+</html>

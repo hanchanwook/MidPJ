@@ -1,0 +1,12 @@
+package com.ict.project.repository;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import com.ict.project.vo.UserVO;
+
+@Repository
+public interface UserDAO {
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+}

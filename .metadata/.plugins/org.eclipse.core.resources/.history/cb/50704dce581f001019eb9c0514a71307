@@ -1,0 +1,9 @@
+package com.ict.project.service;
+
+import com.ict.project.vo.personnel.EmployeeVO;
+
+
+public interface Nor_Service {
+	
+	public EmployeeVO getNormalRegister(EmployeeVO evo) {};
+}

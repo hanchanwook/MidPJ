@@ -1,0 +1,89 @@
+package com.ict.project.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ict.project.service.LoginService;
+import com.ict.project.vo.UserVO;
+
+@Controller
+public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
+    // 로그인 페이지 이동
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; // /WEB-INF/views/login.jsp
+    }
+
+    // 로그인 처리
+    @PostMapping("/loginProcess")
+    public ModelAndView processLogin(HttpServletRequest request)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        ModelAndView mav = new ModelAndView();
+
+        boolean isValid = loginService.authenticate(email, password);
+        if (isValid) {
+            request.getSession().setAttribute("userEmail", email);
+            mav.setViewName("redirect:/index.jsp");
+        } else {
+            mav.addObject("errorMessage", "로그인 실패: 이메일이나 비밀번호가 잘못되었습니다.");
+            mav.setViewName("login");
+        }
+        return mav;
+    }
+
+    // 회원가입 페이지 이동
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";  // /WEB-INF/views/signup.jsp
+    }
+
+    // 회원가입 처리
+    @PostMapping("/signupProcess")
+    public ModelAndView processSignup(HttpServletRequest request) {
+        // 폼에서 전달된 값 가져오기
+        String address = request.getParameter("address");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String phone = request.getParameter("phone");
+
+        // VO에 데이터 세팅
+        UserVO user = new UserVO();
+        user.setAddress(address);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+
+        // DB 저장 처리
+        boolean result = loginService.registerUser(user);
+
+        ModelAndView mav = new ModelAndView();
+
+        if (result) {
+            // 성공 시 메인으로 이동 또는 가입 완료 페이지
+            mav.setViewName("signupSuccess");  // /WEB-INF/views/signupSuccess.jsp
+            mav.addObject("name", name);
+        } else {
+            // 실패 시 회원가입 페이지로 다시 이동
+            mav.addObject("errorMessage", "회원가입 실패: 다시 시도해주세요.");
+            mav.setViewName("signup");
+        }
+        return mav;
+    }
+}

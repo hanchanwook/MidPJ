@@ -1,0 +1,187 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="3부상조 - 당신의 비즈니스 역할을 선택하세요.">
+    <title>3부상조 - 역할 선택</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #e0f4ff, #f0f8ff); /* Soft sky blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            margin: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .header img:hover {
+            transform: scale(1.1);
+        }
+
+        .header span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a; /* Navy blue */
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin: 60px 0 20px 20px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .box-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 0 20px 20px;
+        }
+
+        .box {
+            width: 120px;
+            height: 180px;
+            background: #87ceeb; /* Sky blue */
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+            background: #6ab7d5; /* Darker sky blue */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .right-box {
+            position: absolute;
+            right: 20px;
+            top: 80px;
+            width: 300px;
+            height: 400px;
+            background: #f0f8ff; /* Light blue for placeholder */
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideUp 0.7s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+                margin: 50px 0 15px 15px;
+            }
+
+            .box {
+                width: 100px;
+                height: 150px;
+                font-size: 1rem;
+            }
+
+            .right-box {
+                position: static;
+                width: 100%;
+                height: 300px;
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="${pageContext.request.contextPath}/" class="header">
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709579.png" alt="로고">
+            <span>3부상조</span>
+        </a>
+
+        <div class="title">당신의 담당은 무엇입니까?</div>
+
+        <div class="box-container">
+            <div class="box">인사</div>
+            <div class="box">재고</div>
+            <div class="box">관리자</div>
+        </div>
+
+        <div class="right-box">
+            <!-- Image placeholder: Add your image here -->
+        </div>
+    </div>
+
+    <script>
+        // Optional: Add click handlers for role boxes
+        document.querySelectorAll('.box').forEach(box => {
+            box.addEventListener('click', () => {
+                alert(`선택한 역할: ${box.textContent}`);
+                // Add logic to handle role selection if needed
+            });
+        });
+    </script>
+</body>
+</html>

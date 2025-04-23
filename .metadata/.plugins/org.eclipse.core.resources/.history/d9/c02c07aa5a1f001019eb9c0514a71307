@@ -1,0 +1,23 @@
+package com.ict.project.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ict.project.service.Nor_Service;
+
+@Controller
+public class Nor_LoginAndRegisterController {
+	@Autowired
+	private Nor_Service nor;
+	
+	@GetMapping("/login")
+	public ModelAndView norRegister() {
+		return ModelAndView("");
+	}
+	
+}

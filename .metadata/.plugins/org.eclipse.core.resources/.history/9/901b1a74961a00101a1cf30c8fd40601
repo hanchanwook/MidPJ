@@ -1,0 +1,10 @@
+package com.ict.project.repository;
+
+import org.apache.ibatis.annotations.Mapper;
+import com.ict.project.vo.UserVO;
+
+@Mapper
+public interface UserDAO {
+    UserVO findByEmpId(String emp_id);
+    int insertUser(UserVO user);
+}

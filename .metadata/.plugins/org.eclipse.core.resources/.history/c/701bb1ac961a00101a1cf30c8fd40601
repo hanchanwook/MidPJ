@@ -1,0 +1,28 @@
+package com.ict.project.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ict.project.repository.UserDAO;
+import com.ict.project.vo.UserVO;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Override
+    public UserVO login(String emp_id, String emp_password) {
+        UserVO user = userDAO.findByEmpId(emp_id);
+        if (user != null && user.getEmp_password().equals(emp_password)) {
+            return user;
+        }
+        return null;
+    }
+
+    @Override
+    public int signup(UserVO user) {
+        return userDAO.insertUser(user);
+    }
+}

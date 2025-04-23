@@ -1,0 +1,33 @@
+package com.ict.project.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.ict.project.repository.UserDAO;
+import com.ict.project.vo.UserVO;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Override
+    public UserVO loginByEmail(String emp_email, String emp_password) {
+        UserVO user = userDAO.findByEmail(emp_email);
+        if (user != null && user.getEmp_password().equals(emp_password)) {
+            return user;
+        }
+        return null;
+    }
+
+    @Override
+    public int signup(UserVO user) {
+        // 먼저 employee 테이블에 삽입
+        int employeeResult = userDAO.insertEmployee(user);
+        if (employeeResult > 0) {
+            // employee 삽입 성공 시 user 테이블에 삽입
+            return userDAO.insertUser(user);
+        }
+        return 0; // employee 삽입 실패 시 0 반환
+    }
+}

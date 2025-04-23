@@ -1,0 +1,11 @@
+package com.ict.project.vo;
+
+public class UserVO {
+	private String emp_email,
+	emp_name,
+	   emp_password,
+	   home ,
+	   phone_number;
+	
+	
+}

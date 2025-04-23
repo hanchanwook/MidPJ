@@ -1,0 +1,106 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>타이머 & 스톱워치</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .timer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            text-align: center;
+        }
+
+        .time-display {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            background-color: #ddd;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background-color: #007bff;
+            height: 100%;
+            width: 0;
+            transition: width 1s linear;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>활동시간 등록</h1>
+            <span>&lt;</span> 2025.4.3
+        </header>
+        <div class="timer-section">
+            <div class="card">
+                <h2>타이머</h2>
+                <div class="time-display" id="timerDisplay">00:00</div>
+                <div class="progress-bar">
+                    <div class="progress" id="timerProgress"></div>
+                </div>
+                <button onclick="startTimer()">시작</button>
+                <button onclick="resetTimer()">리셋</button>
+            </div>
+            <div class="card">
+                <h2>스톱워치</h2>
+                <div class="time-display" id="stopwatchDisplay">00:00:00</div>
+                <button onclick="startStopwatch()">시작</button>
+                <button onclick="stopStopwatch()">정지</button>
+                <button onclick="resetStopwatch()">리셋</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="${pageContext.request.contextPath}/resources/js/timer.js"></script>
+</body>
+</html>

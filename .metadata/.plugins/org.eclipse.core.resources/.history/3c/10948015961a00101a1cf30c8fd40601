@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userMapper">
+
+    <!-- 회원가입 -->
+    <insert id="insertUser" parameterType="com.ict.project.vo.UserVO">
+        INSERT INTO users (email, password, name)
+        VALUES (#{email}, #{password}, #{name})
+    </insert>
+
+    <!-- 로그인 확인 -->
+    <select id="loginUser" parameterType="com.ict.project.vo.UserVO" resultType="com.ict.project.vo.UserVO">
+        SELECT * FROM users
+        WHERE email = #{email}
+          AND password = #{password}
+    </select>
+
+</mapper>

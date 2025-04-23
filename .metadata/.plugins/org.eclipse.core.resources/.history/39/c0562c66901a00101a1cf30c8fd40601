@@ -1,0 +1,96 @@
+package com.ict.project.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ict.project.service.LoginService;
+import com.ict.project.vo.UserVO;
+
+@Controller
+public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
+    // 로그인 페이지 이동
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; // /WEB-INF/views/login.jsp
+    }
+
+    // 로그인 처리
+    @PostMapping("/loginProcess")
+    public ModelAndView processLogin(HttpServletRequest request)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        ModelAndView mav = new ModelAndView();
+
+        boolean isValid = loginService.authenticate(email, password);
+        if (isValid) {
+            request.getSession().setAttribute("userEmail", email);
+            mav.setViewName("redirect:/index.jsp");
+        } else {
+            mav.addObject("errorMessage", "로그인 실패: 이메일이나 비밀번호가 잘못되었습니다.");
+            mav.setViewName("login");
+        }
+        return mav;
+    }
+
+    // 회원가입 페이지 이동
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";  // /WEB-INF/views/signup.jsp
+    }
+
+    // 회원가입 처리
+    @PostMapping("/signupProcess")
+    public ModelAndView processSignup(HttpServletRequest request) {
+        String emp_email = request.getParameter("emp_email");
+        String emp_id = request.getParameter("emp_id");
+        String emp_name = request.getParameter("emp_name");
+        String emp_password = request.getParameter("emp_password");
+        String dept_id = request.getParameter("dept_id");
+        String position = request.getParameter("position");
+        String pay_grade = request.getParameter("pay_grade");
+        String hire_date = request.getParameter("hire_date");
+        String resignation_date = request.getParameter("resignation_date");
+        String home = request.getParameter("home");
+        String phone_number = request.getParameter("phone_number");
+
+        UserVO user = new UserVO();
+        user.setEmp_email(emp_email);
+        user.setEmp_id(emp_id);
+        user.setEmp_name(emp_name);
+        user.setEmp_password(emp_password);
+        user.setDept_id(dept_id);
+        user.setPosition(position);
+        user.setPay_grade(pay_grade);
+        user.setHire_date(hire_date);
+        user.setResignation_date(resignation_date);
+        user.setHome(home);
+        user.setPhone_number(phone_number);
+
+        boolean result = loginService.registerUser(user);
+
+        ModelAndView mav = new ModelAndView();
+        if (result) {
+            mav.setViewName("signupSuccess");  // 가입 성공 시
+            mav.addObject("emp_name", emp_name);
+        } else {
+            mav.setViewName("signup");  // 실패 시 다시 폼으로
+            mav.addObject("errorMessage", "회원가입 실패: 다시 시도해주세요.");
+        }
+        return mav;
+    }
+
+}

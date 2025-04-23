@@ -1,0 +1,8 @@
+package com.ict.project.repository;
+
+import com.ict.project.vo.UserVO;
+
+public interface UserDAO {
+    int insertUser(UserVO user);
+    UserVO selectUser(UserVO user);
+}

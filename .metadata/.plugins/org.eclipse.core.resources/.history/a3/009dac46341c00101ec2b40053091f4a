@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+	rel="stylesheet">
+<link href="<c:url value='/resources/css/Header.css' />"
+	rel="stylesheet">
+<link href="<c:url value='/resources/css/Footer.css' />"
+	rel="stylesheet">
+<title>공지사항 상세</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+</head>
+<body class="bg-gray-100">
+	<!-- Header -->
+	<header class="bg-white shadow">
+		<div
+			class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+			<div class="flex items-center">
+				<img src="<%=request.getContextPath()%>/images/logo.png" alt="Logo"
+					class="h-10">
+			</div>
+			<nav class="space-x-4">
+				<a href="<%=request.getContextPath()%>/home"
+					class="text-gray-600 hover:text-blue-500">홈</a> <a
+					href="<%=request.getContextPath()%>/about"
+					class="text-gray-600 hover:text-blue-500">회사소개</a> <a
+					href="<%=request.getContextPath()%>/notice"
+					class="text-gray-600 hover:text-blue-500">공지사항</a> <a
+					href="<%=request.getContextPath()%>/support"
+					class="text-gray-600 hover:text-blue-500">고객지원</a>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Main Content -->
+	<main class="max-w-4xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
+		<div class="bg-white shadow rounded-lg p-6">
+			<!-- Post Title -->
+			<h1 class="text-2xl font-bold text-gray-800 mb-4">${notice.title}</h1>
+			<!-- Post Meta -->
+			<div class="flex items-center text-gray-500 text-sm mb-6">
+				<span>작성일: ${notice.createdDate}</span>
+			</div>
+			<!-- Post Content -->
+			<div class="prose max-w-none text-gray-700">
+				<p>${notice.content}</p>
+			</div>
+			<!-- Back Button -->
+			<div class="mt-8">
+				<a href="<%=request.getContextPath()%>/notice"
+					class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">목록으로</a>
+			</div>
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer class="bg-white shadow mt-8">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+			<div class="flex justify-between items-center">
+				<div class="text-gray-600 text-sm">
+					<p>&copy; 2025 회사명. All rights reserved.</p>
+				</div>
+				<nav class="space-x-4">
+					<a href="<%=request.getContextPath()%>/home"
+						class="text-gray-600 hover:text-blue-500">홈</a> <a
+						href="<%=request.getContextPath()%>/about"
+						class="text-gray-600 hover:text-blue-500">회사소개</a> <a
+						href="<%=request.getContextPath()%>/notice"
+						class="text-gray-600 hover:text-blue-500">공지사항</a> <a
+						href="<%=request.getContextPath()%>/support"
+						class="text-gray-600 hover:text-blue-500">고객지원</a>
+				</nav>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .timer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            text-align: center;
+        }
+
+        .time-display {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            background-color: #ddd;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background-color: #007bff;
+            height: 100%;
+            width: 0;
+            transition: width 1s linear;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+	<div class="container">
+        <header>
+            <h1>활동시간 등록</h1>
+            <span>&lt;</span> 2025.4.3
+        </header>
+        <div class="timer-section">
+            <div class="card">
+                <h2>타이머</h2>
+                <div class="time-display" id="timerDisplay">00:00</div>
+                <div class="progress-bar">
+                    <div class="progress" id="timerProgress"></div>
+                </div>
+                <button onclick="startTimer()">시작</button>
+                <button onclick="resetTimer()">리셋</button>
+            </div>
+            <div class="card">
+                <h2>스톱워치</h2>
+                <div class="time-display" id="stopwatchDisplay">00:00:00</div>
+                <button onclick="startStopwatch()">시작</button>
+                <button onclick="stopStopwatch()">정지</button>
+                <button onclick="resetStopwatch()">리셋</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    
+        let timerInterval, stopwatchInterval;
+        let timerSeconds = 0, stopwatchTime = 0;
+
+        // 타이머 기능
+        function startTimer() {
+            if (!timerInterval) {
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    updateTimerDisplay();
+                    updateTimerProgress();
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerSeconds = 0;
+            updateTimerDisplay();
+            updateTimerProgress();
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function updateTimerProgress() {
+            const progress = (timerSeconds % 60) / 60 * 100;
+            document.getElementById('timerProgress').style.width = `${progress}%`;
+        }
+
+        // 스톱워치 기능
+        function startStopwatch() {
+            if (!stopwatchInterval) {
+                stopwatchInterval = setInterval(() => {
+                    stopwatchTime++;
+                    updateStopwatchDisplay();
+                }, 1000);
+            }
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+            stopwatchTime = 0;
+            updateStopwatchDisplay();
+        }
+
+        function updateStopwatchDisplay() {
+            const hours = Math.floor(stopwatchTime / 3600);
+            const minutes = Math.floor((stopwatchTime % 3600) / 60);
+            const seconds = stopwatchTime % 60;
+            document.getElementById('stopwatchDisplay').textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>

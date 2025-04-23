@@ -1,0 +1,19 @@
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+<annotation-driven/>
+<!--  Handler Mapping : 요청에 따른 컨틀로러 지정 (일반적으로는 어노테이션한다.)  -->
+
+<resources mapping="/resources/**" location="/resources/"/>
+<!--  컨트롤러에서 return 받은 ModelAndView 안 ViewName을 이용해서 View를 완성  -->
+<!--   /WEB-INF/views/(prefix) result1   .jsp(suffix)  -->
+<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<beans:property name="prefix" value="/WEB-INF/views/"/>
+<beans:property name="suffix" value=".jsp"/>
+</beans:bean>
+<context:component-scan base-package="com.ict"/>
+<!--  파일업로드용 클래스 등록  -->
+<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<beans:property name="maxUploadSize" value="524288000"/>
+<!--  1024 * 1024 * 500 = 500MB  -->
+<beans:property name="defaultEncoding" value="UTF-8"/>
+</beans:bean>
+</beans:beans>

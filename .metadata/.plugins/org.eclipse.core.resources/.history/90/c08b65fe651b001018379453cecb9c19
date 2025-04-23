@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3부상조 담당 선택</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8f1f1; /* 배경색 바디용 */
+    }
+    .container {
+      width: 66.6vw; /* 바디 너비의 3분의 2 */
+      height: 66.6vh; /* 바디 높이의 3분의 2 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .content {
+      width: 90%;
+      height: 90%;
+      background-color: #f5eeee;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <!-- 여기에 기존 화면 구성 요소 삽입 -->
+      <h2>당신의 담당은 무엇입니까?</h2>
+      <div style="display: flex; gap: 20px; margin: 20px;">
+        <div style="background: #ddd; padding: 30px; border-radius: 10px;">인사</div>
+        <div style="background: #ddd; padding: 30px; border-radius: 10px;">재고</div>
+        <div style="background: #ddd; padding: 30px; border-radius: 10px;">관리자</div>
+      </div>
+      <button style="padding: 10px 20px; border: none; border-radius: 8px; background: #ccc;">로그인</button>
+    </div>
+  </div>
+</body>
+</html>

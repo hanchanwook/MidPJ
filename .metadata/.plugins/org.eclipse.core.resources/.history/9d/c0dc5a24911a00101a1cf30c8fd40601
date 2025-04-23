@@ -1,0 +1,7 @@
+package com.ict.project.service;
+
+import com.ict.project.vo.UserVO;
+
+public interface UserService {
+    int insertUser(UserVO userVO);
+}

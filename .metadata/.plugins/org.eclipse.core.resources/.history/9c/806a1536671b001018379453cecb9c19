@@ -1,0 +1,111 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>3부상조 - 로그인</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9f1f1;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 60%;  /* 전체 너비의 60% = 3/5 */
+            max-width: 800px;
+            height: 60%; /* 높이도 약간 줄임 */
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+        }
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+        }
+        .header span {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .title {
+            margin-top: 50px;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .box-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .box {
+            width: 70px;
+            height: 100px;
+            background-color: #dddddd;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+        }
+        .login-button {
+            background-color: #dddddd;
+            border: none;
+            border-radius: 12px;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .right-box {
+            position: absolute;
+            right: 0;
+            top: 20px;
+            width: 140px;
+            height: 350px;
+            background-color: #dddddd;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo.png" alt="로고">
+        <span>3부상조</span>
+    </div>
+
+    <div class="title">당신의 담당은 무엇입니까?</div>
+
+    <div class="box-container">
+        <div class="box">인사</div>
+        <div class="box">재고</div>
+        <div class="box">관리자</div>
+    </div>
+
+    <button class="login-button">로그인</button>
+
+    <div class="right-box"></div>
+</div>
+
+</body>
+</html>

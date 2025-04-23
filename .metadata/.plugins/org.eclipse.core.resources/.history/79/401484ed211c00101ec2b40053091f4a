@@ -1,0 +1,414 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="3부창조 로그인 - 안전하고 간편한 비즈니스 플랫폼에 접속하세요.">
+    <title>3부창조 - 로그인</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body, html {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1608889175626-2a2f464f2130');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        /* Header */
+        header {
+            background-color: #87ceeb;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #6ab7d5;
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .login-wrapper {
+            display: flex;
+            max-width: 960px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .branding-section {
+            flex: 1;
+            background: linear-gradient(135deg, #87ceeb, #6ab7d5);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .branding-section img {
+            width: 80px;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .branding-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .branding-section p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #e0f4ff;
+        }
+
+        .login-section {
+            flex: 1;
+            padding: 3rem;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .login-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #333;
+        }
+
+        .error-message {
+            display: none;
+            color: #fff;
+            background-color: #ff6b6b;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #87ceeb;
+            box-shadow: 0 0 8px rgba(135, 206, 235, 0.3);
+            background-color: #fff;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background-color: #1e3a8a;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #172554;
+            transform: scale(1.03);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a {
+            color: #6ab7d5;
+        }
+
+        .forgot-password a:hover {
+            color: #87ceeb;
+            text-decoration: underline;
+        }
+
+        .signup {
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .signup a {
+            color: #6ab7d5;
+        }
+
+        .signup a:hover {
+            color: #87ceeb;
+            text-decoration: underline;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.03);
+        }
+
+        .social-google {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .social-kakao {
+            background-color: #FEE500;
+            color: #381E1F;
+        }
+
+        .social-naver {
+            background-color: #03C75A;
+            color: #fff;
+        }
+
+        .social-btn img {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #e0f4ff;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #e0f4ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .form-group {
+            animation: slideUp 0.5s ease-out forwards;
+            animation-delay: calc(0.1s * var(--order));
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-wrapper {
+                flex-direction: column;
+                max-width: 90%;
+            }
+
+            .branding-section {
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .branding-section img {
+                width: 60px;
+            }
+
+            .branding-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .branding-section p {
+                font-size: 1rem;
+            }
+
+            .login-section {
+                padding: 2rem;
+            }
+
+            .login-section h3 {
+                font-size: 1.5rem;
+            }
+
+            .social-login {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .social-btn {
+                min-width: auto;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="/">3부창조</a></div>
+        <nav class="nav-links">
+            <a href="/">홈</a>
+            <a href="signup">회원가입</a>
+            <a href="#">고객 지원</a>
+        </nav>
+    </header>
+    <main>
+        <div class="login-wrapper">
+            <div class="branding-section">
+                <img src="https://cdn-icons-png.flaticon.com/512/709/709579.png" alt="3부창조 로고" />
+                <h2>3부창조에 오신 것을 환영합니다</h2>
+                <p>안전하고 간편한 비즈니스 플랫폼으로, 당신의 성공을 함께 만들어갑니다.</p>
+            </div>
+            <div class="login-section">
+                <h3>로그인</h3>
+                <div class="error-message" id="error-message"></div>
+                <form name="loginForm" onsubmit="return validateForm()" action="login" method="post">
+                    <div class="form-group" style="--order: 1;">
+                        <label for="emp_email">이메일</label>
+                        <input type="email" id="emp_email" name="emp_email" placeholder="이메일" required tabindex="1" />
+                    </div>
+                    <div class="form-group" style="--order: 2;">
+                        <label for="emp_password">비밀번호</label>
+                        <input type="password" id="emp_password" name="emp_password" placeholder="비밀번호" required tabindex="2" />
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">비밀번호를 잊으셨나요?</a>
+                    </div>
+                    <div class="form-group" style="--order: 3;">
+                        <button type="submit" class="login-btn" tabindex="3">로그인</button>
+                    </div>
+                </form>
+                <div class="signup">
+                    계정이 없으신가요? <a href="signup">회원가입</a>
+                </div>
+                <div class="social-login">
+                    <button class="social-btn social-google" tabindex="4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google 아이콘" /> Google
+                    </button>
+                    <button class="social-btn social-kakao" tabindex="5">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111493.png" alt="Kakao 아이콘" /> Kakao
+                    </button>
+                    <button class="social-btn social-naver" tabindex="6">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2175/2175377.png" alt="Naver 아이콘" /> Naver
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 3부창조. <a href="#">개인정보처리방침</a> | <a href="#">고객 지원</a></p>
+    </footer>
+
+    <script>
+
+    </script>
+</body>
+</html>

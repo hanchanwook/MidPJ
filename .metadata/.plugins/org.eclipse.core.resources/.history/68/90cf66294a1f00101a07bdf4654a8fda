@@ -1,0 +1,49 @@
+package com.ict.project.vo.store;
+
+// 최성현
+public class ItemVO {
+	private String item_id, item_name, unit_price, category, file_name;
+
+	public String getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(String item_id) {
+		this.item_id = item_id;
+	}
+
+	public String getItem_name() {
+		return item_name;
+	}
+
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+
+	public String getUnit_price() {
+		return unit_price;
+	}
+
+	public void setUnit_price(String unit_price) {
+		this.unit_price = unit_price;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getFile_name() {
+		return file_name;
+	}
+
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
+
+	
+	
+}

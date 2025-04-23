@@ -1,0 +1,52 @@
+package com.ict.project.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import com.ict.project.service.UserService;
+import com.ict.project.vo.UserVO;
+
+@Controller
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";
+    }
+
+    @PostMapping("/login")
+    public ModelAndView login(UserVO user) {
+        ModelAndView mav = new ModelAndView();
+        UserVO loggedInUser = userService.login(user.getEmp_id(), user.getEmp_password());
+        if (loggedInUser != null) {
+            mav.setViewName("redirect:/");
+        } else {
+            mav.addObject("error", "Invalid ID or Password");
+            mav.setViewName("login");
+        }
+        return mav;
+    }
+
+    @PostMapping("/signup")
+    public ModelAndView signup(UserVO user) {
+        ModelAndView mav = new ModelAndView();
+        int result = userService.signup(user);
+        if (result > 0) {
+            mav.setViewName("redirect:/login");
+        } else {
+            mav.addObject("error", "Signup Failed");
+            mav.setViewName("signup");
+        }
+        return mav;
+    }
+}

@@ -1,0 +1,23 @@
+package com.ict.project.repository;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import com.ict.project.vo.UserVO;
+
+@Repository
+public class UserDAO {
+
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
+
+    private static final String MAPPER_NAMESPACE = "web";
+
+    public UserVO findByEmpId(String emp_id) {
+        return sqlSessionTemplate.selectOne(MAPPER_NAMESPACE + ".findByEmpId", emp_email);
+    }
+
+    public int insertUser(UserVO user) {
+        return sqlSessionTemplate.insert(MAPPER_NAMESPACE + ".insertUser", user);
+    }
+}

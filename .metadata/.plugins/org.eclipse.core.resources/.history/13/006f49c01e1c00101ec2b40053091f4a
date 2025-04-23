@@ -1,0 +1,174 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>출퇴근 등록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .attendance-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            text-align: center;
+            position: relative;
+        }
+
+        .time-display {
+            font-size: 2em;
+            margin: 20px 0;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 120px;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
+        .record-btn {
+            background-color: #ff4d4d;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .illustration {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto;
+            background: url('https://via.placeholder.com/80') no-repeat center; /* 이미지 대체 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>출퇴근 등록</h1>
+            <div>
+                <span>&lt;</span> 2025.4.3
+            </div>
+        </header>
+        <div class="attendance-section">
+            <div class="card">
+                <div class="label">출근하기</div>
+                <div class="illustration"></div>
+                <div class="time-display" id="checkInTime">00:00</div>
+                <div class="status" id="checkInStatus">미등록</div>
+                <button id="checkInBtn" onclick="checkIn()">출근등록</button>
+                <button class="record-btn" onclick="recordCheckIn()" disabled>▼</button>
+            </div>
+            <div class="card">
+                <div class="label">퇴근하기</div>
+                <div class="illustration"></div>
+                <div class="time-display" id="checkOutTime">09:00</div>
+                <div class="status" id="checkOutStatus">출근</div>
+                <button id="checkOutBtn" onclick="checkOut()" disabled>퇴근등록</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isCheckedIn = false;
+
+        // 현재 시간 가져오기
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return hours + ':' + minutes;
+        }
+
+        // 출근 등록
+        function checkIn() {
+            if (!isCheckedIn) {
+                const currentTime = getCurrentTime();
+                document.getElementById('checkInTime').textContent = currentTime;
+                document.getElementById('checkInStatus').textContent = '출근';
+                document.getElementById('checkOutStatus').textContent = '출근';
+                document.getElementById('checkInBtn').disabled = true;
+                document.getElementById('checkOutBtn').disabled = false;
+                document.getElementsByClassName('record-btn')[0].disabled = false;
+                isCheckedIn = true;
+            }
+        }
+
+        // 퇴근 등록
+        function checkOut() {
+            if (isCheckedIn) {
+                const currentTime = getCurrentTime();
+                document.getElementById('checkOutTime').textContent = currentTime;
+                document.getElementById('checkOutStatus').textContent = '퇴근완료';
+                document.getElementById('checkOutBtn').disabled = true;
+                isCheckedIn = false;
+            }
+        }
+
+        // 기록 버튼 (출근 시간 기록 후 상태 변경)
+        function recordCheckIn() {
+            alert('출근 시간이 기록되었습니다.');
+            document.getElementsByClassName('record-btn')[0].disabled = true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- DB 정보를 넣는다. -->
+	
+	<!-- DB접속 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/pj" />
+		<property name="username" value="ictedu" />
+		<property name="password" value="1234" />
+	</bean>
+	
+	<!-- mybatis:config (mapper 위치 지정) -->
+	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"  />
+		<property name="mapperLocations" value="classpath*:com/ict/*/repository/*_mapper.xml" />
+	</bean>
+	
+	<!-- MyBatis을 사용할 클래스 생성-->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="factoryBean" />
+	</bean>			
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+package com.ict.project.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ict.project.service.UserService;
+import com.ict.project.vo.UserVO;
+
+@Controller
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    // 로그인 페이지로 이동
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";  // login.jsp 렌더링
+    }
+
+    // 회원가입 페이지로 이동
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";  // signup.jsp 렌더링
+    }
+
+    // 로그인 처리
+    @PostMapping("/login")
+    public ModelAndView login(UserVO user) {
+        ModelAndView mav = new ModelAndView();
+        UserVO loggedInUser = userService.login(user.getEmp_id(), user.getEmp_password());
+        if (loggedInUser != null) {
+            mav.setViewName("redirect:/");
+        } else {
+            mav.addObject("error", "Invalid ID or Password");
+            mav.setViewName("login");
+        }
+        return mav;
+    }
+
+    // 회원가입 처리
+    @PostMapping("/signup")
+    public ModelAndView signup(UserVO user) {
+        ModelAndView mav = new ModelAndView();
+        int result = userService.signup(user);
+        if (result > 0) {
+            mav.setViewName("redirect:/login");
+        } else {
+            mav.addObject("error", "Signup Failed");
+            mav.setViewName("signup");
+        }
+        return mav;
+    }
+}

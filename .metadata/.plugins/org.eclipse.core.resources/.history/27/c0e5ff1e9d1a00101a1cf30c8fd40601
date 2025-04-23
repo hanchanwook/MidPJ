@@ -1,0 +1,63 @@
+package com.ict.project.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.ModelAndView;
+import com.ict.project.service.UserService;
+import com.ict.project.vo.UserVO;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Controller
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";
+    }
+
+    @PostMapping("/login")
+    public ModelAndView login(UserVO user) {
+        ModelAndView mav = new ModelAndView();
+        UserVO loggedInUser = userService.login(user.getEmp_id(), user.getEmp_password());
+        if (loggedInUser != null) {
+            mav.setViewName("redirect:/");
+        } else {
+            mav.addObject("error", "Invalid ID or Password");
+            mav.setViewName("login");
+        }
+        return mav;
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<Map<String, Object>> signup(@RequestBody UserVO user) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            int result = userService.signup(user);
+            if (result > 0) {
+                response.put("success", true);
+                response.put("message", "회원가입 성공");
+            } else {
+                response.put("success", false);
+                response.put("message", "회원가입 실패");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "서버 오류: " + e.getMessage());
+        }
+        return ResponseEntity.ok(response);
+    }
+}
